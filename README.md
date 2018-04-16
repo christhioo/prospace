@@ -5,5 +5,18 @@ account, you are able to afford to rent a spaceship, leave earth, and fly all ov
 common metals and dirt (which apparently is worth a lot). Buying and selling over the galaxy
 requires you to convert numbers and units, and you decided to write a program to help you.The
 numbers used for intergalactic transactions follows similar convention to the roman numerals and
-you have painstakingly collected the appropriate translation between them. Roman numerals are
-based on seven symbols:
+you have painstakingly collected the appropriate translation between them.
+
+Installation
+------------
+Install server and client dependencies
+```
+npm install
+```
+
+Usage
+-----
+To start the server and client at the same time (from the root of the project)
+```
+npm run dev
+```
