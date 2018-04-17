@@ -17,7 +17,7 @@ Install server dependencies
 ```
 npm install
 ```
-Go to /client directory and install dependencies
+Go to /client directory and install client dependencies
 ```
 cd client
 npm install
