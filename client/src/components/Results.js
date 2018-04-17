@@ -20,7 +20,7 @@ const Results = props => {
 };
 
 Results.propTypes = {
-	output: PropTypes.string.isRequired
+	output: PropTypes.string.isRequired,
 };
 
 export default Results;

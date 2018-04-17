@@ -35,10 +35,16 @@ export default class InputForm extends Component {
 		e.preventDefault();
 		
 		if (this.state.userInput) {
-			this.callAPI({
-				userInput: this.state.userInput
-			}).then(res => this.props.onGetResult(res.output))
-			  .catch(err => console.log(err));
+			//if the input doesn't contain keyword of 'how much is' and 'how many credits is', 
+			//then prompt error message
+			if (this.state.userInput.toLowerCase().indexOf('how much is') === -1 && this.state.userInput.toLowerCase().indexOf('how many credits is') === -1){
+				this.props.onGetResult('Question is not found in the input');
+			} else {
+				this.callAPI({
+					userInput: this.state.userInput
+				}).then(res => this.props.onGetResult(res.output))
+				  .catch(err => console.log(err));
+			}
 		} else {
 			this.props.onGetResult('Type or paste your input before clicking Submit button');
 		}

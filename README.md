@@ -31,17 +31,37 @@ npm run dev
 ```
 This will launch React app and server simultaneously.
 
+System Design
+-------------
+This application consists of:
+* React.js as the frontend user interface
+* Node.js as the backend server
+
+Front-end communicates with backend server by calling REST API url provided in Node.js.
+User input will be submitted through POST method in json format to the server.
+Server will receive the input, process it, and then response back to the frontend side.
+
+### Brief Summary of Parsing Algorithm ###
+The algorithm for the parsing program is as follows.
+1) Split the input by newline
+2) For each sentence, find keyword of 'is', 'credits', 'how much', 'how many credits', and '?'
+3) If keyword 'how much is' and 'how many credits is' and 'credits' are not found in the sentence, obtain dirt name and value.
+4) If keyword 'how much is' and 'how many credits is' are not found in the sentence, find keyword 'credits', obtain common metal name and value.
+5) If the sentence contains keyword 'how much is' or 'how many credits is', process all words after the keyword and before '?'.
+6) Process question based on the name and value obtained in step (4) and (5).
+
 Assumptions
 -----------
 * Input should be submitted as a whole text. 
   It is expected to contain name and value of dirt and common metals, follow by question(s).
   Each statement and each question should end with newline.
 * Keyword 'is' should be present in the input as the identifier for dirt and common metals.
+* Dirt should only contain one word during initialisation.
 * Dirt should not contain keyword 'Credits'.
 * Dirt value should be in roman numerals.
 * Common metals should contain keyword 'Credits'.
 * Common metals value should be in numbers.
-* All Questions should end with question mark (?).
+* All Questions should end with question mark (?), with the white space before '?'.
 * Question should start with keyword 'how much is' to identify dirt value.
 * Question should start with keyword 'how many Credits is' to identify common metal value.
 * There should be only one metal name per statement or question.
