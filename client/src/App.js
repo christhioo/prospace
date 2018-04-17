@@ -7,41 +7,13 @@ import Results from './components/Results';
 
 class App extends Component {
 	state = {
-		userInput: '',
-		response: ''
+		result: ''
 	};
 
-	//call API to post user input
-	callAPI = async (content) => {
-		const response = await fetch('/api/submitInput', {
-			method: 'POST',
-			body: JSON.stringify(content),
-			headers: {'Content-Type': 'application/json'}
-		});
-		
-		const body = await response.json();
-		return body;	  
+	onGetResult = (userInput) => {
+		this.setState({ result: userInput });
 	};
-	
-	//on user input change
-	onInputChange = e =>
-		this.setState({ userInput: e.target.value });
-	
-	//on user input form submission
-	onInputSubmit = e => {
-		e.preventDefault();
-		
-		if (this.state.userInput) {
-			this.callAPI({
-				userInput: this.state.userInput
-			}).then(res => this.setState({ response: res.output }))
-			  .catch(err => console.log(err));
-		} else {
-			this.setState({ response: 'Type or paste your input before clicking Submit button' });
-		}
-		
-	};
-
+  
 	render() {
 		return (
 		  <div>
@@ -49,13 +21,11 @@ class App extends Component {
 			  <Grid>
 				<Intro />
 				<InputForm 
-					userInput={this.state.userInput}
-					onInputChange={this.onInputChange}
-					onInputSubmit={this.onInputSubmit}
+					onGetResult={this.onGetResult}
 				/>
 			  </Grid>
 			</Jumbotron>
-			<Results output={this.state.response} />
+			<Results output={this.state.result} />
 		  </div>
 		);
 	}

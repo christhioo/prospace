@@ -9,17 +9,27 @@ you have painstakingly collected the appropriate translation between them.
 
 Installation
 ------------
-Install server and client dependencies
+Install nodemon globally
+```
+npm i nodemon -g
+```
+Install server dependencies
 ```
 npm install
 ```
+Go to /client directory and install dependencies
+```
+cd client
+npm install
+```
 
-Usage
------
-To start the server and client at the same time (from the root of the project)
+Running the App
+---------------
+From the project root directory run the following:
 ```
 npm run dev
 ```
+This will launch React app and server simultaneously.
 
 Assumptions
 -----------

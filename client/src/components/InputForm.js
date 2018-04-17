@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import {
 	Form,
 	FormGroup,
@@ -7,26 +8,62 @@ import {
 	Button
 } from 'react-bootstrap';
 
-const InputForm = props => (
-	<Form onSubmit={props.onInputSubmit}>
-		<FormGroup controlId="inputFormTextarea">
-			<FormControl 
-				componentClass="textarea" 
-				rows="3" 
-				value={props.userInput} 
-				placeholder="Type or paste your input here..."
-				onChange={props.onInputChange} />
-		</FormGroup>
-		<Button bsStyle="primary" type="submit">
-			Submit
-		</Button>		
-	</Form>
-);
-
-InputForm.propTypes = {
-	userInput: PropTypes.string,
-	onInputChange: PropTypes.func.isRequired,
-	onInputSubmit: PropTypes.func.isRequired
-};
-
-export default InputForm;
+export default class InputForm extends Component {
+	
+	static propTypes: {
+		onGetResult: PropTypes.func.isRequired,
+	};
+  
+	state = {
+		userInput: ''
+	};
+	
+	//call API to post user input
+	callAPI = async (content) => {
+		const response = await fetch('/api/submitInput', {
+			method: 'POST',
+			body: JSON.stringify(content),
+			headers: {'Content-Type': 'application/json'}
+		});
+		
+		const body = await response.json();
+		return body;	  
+	};
+	
+	//on user input form submission
+	onInputSubmit = e => {
+		e.preventDefault();
+		
+		if (this.state.userInput) {
+			this.callAPI({
+				userInput: this.state.userInput
+			}).then(res => this.props.onGetResult(res.output))
+			  .catch(err => console.log(err));
+		} else {
+			this.props.onGetResult('Type or paste your input before clicking Submit button');
+		}
+		
+	};
+	
+	//on user input change
+	onInputChange = e =>
+		this.setState({ userInput: e.target.value });
+		
+	render() {
+		return (
+			<Form onSubmit={this.onInputSubmit}>
+				<FormGroup>
+					<FormControl 
+						componentClass="textarea" 
+						rows="3" 
+						value={this.state.userInput} 
+						placeholder="Type or paste your input here..."
+						onChange={this.onInputChange} />
+				</FormGroup>
+				<Button bsStyle="primary" type="submit">
+					Submit
+				</Button>		
+			</Form>
+		);
+	}
+}
