@@ -49,11 +49,13 @@ parseInput = userInput => {
 						question += word + ' ';
 					} else if(index === (array.length - 1) && indexOfHowMany === 0 && question != notValidMsg) {
 						//last word is the metal name & 'how many'
-						//capitalise the first character of the metal name
-						question += word.charAt(0).toUpperCase() + word.slice(1) + ' ';
-					} else {
-						question = notValidMsg;
-					}
+						//check whether the metal name exists in the list
+						if(metalMap.get(word)){
+							//capitalise the first character of the metal name
+							question += word.charAt(0).toUpperCase() + word.slice(1) + ' ';
+						} else { question = notValidMsg; }
+						
+					} else { question = notValidMsg; }
 				});
 				
 				//if the roman numeral is invalid, return invalid msg
