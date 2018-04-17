@@ -41,7 +41,7 @@ Front-end communicates with backend server by calling REST API url provided in N
 User input will be submitted through POST method in json format to the server.
 Server will receive the input, process it, and then response back to the frontend side.
 
-### Brief Summary of Parsing Algorithm ###
+### Brief Description of Parsing Algorithm ###
 The algorithm for the parsing program is as follows.
 1) Split the input by newline
 2) For each sentence, find keyword of 'is', 'credits', 'how much', 'how many credits', and '?'
