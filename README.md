@@ -20,3 +20,42 @@ To start the server and client at the same time (from the root of the project)
 ```
 npm run dev
 ```
+
+Assumptions
+-----------
+* Input should be submitted as a whole text. 
+  It is expected to contain name and value of dirt and common metals, follow by question(s).
+  Each statement and each question should end with newline.
+* Keyword 'is' should be present in the input as the identifier for dirt and common metals.
+* Dirt should not contain keyword 'Credits'.
+* Dirt value should be in roman numerals.
+* Common metals should contain keyword 'Credits'.
+* Common metals value should be in numbers.
+* All Questions should end with question mark (?).
+* Question should start with keyword 'how much is' to identify dirt value.
+* Question should start with keyword 'how many Credits is' to identify common metal value.
+* There should be only one metal name per statement or question.
+* There should be at least one dirt name before common metal for each statement and question.
+
+Test Input & Expected Output
+----------------------------
+### Test Input ###
+glob is I
+prok is V
+pish is X
+tegj is L
+glob glob Silver is 34 Credits
+glob prok Gold is 57800 Credits
+pish pish Iron is 3910 Credits
+how much is pish tegj glob glob ?
+how many Credits is glob prok Silver ?
+how many Credits is glob prok Gold ?
+how many Credits is glob prok Iron ?
+how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
+
+### Expected Output ###
+pish tegj glob glob is 42
+glob prok Silver is 68 Credits
+glob prok Gold is 57800 Credits
+glob prok Iron is 782 Credits
+I have no idea what you are talking about
